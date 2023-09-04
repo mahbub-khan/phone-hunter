@@ -11,11 +11,16 @@
       type="text/css"
     />
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .card-title {
+        display: block;
+      }
+    </style>
   </head>
   <body>
     <header></header>
     <main class="w-4/5 mx-auto">
-      <section class="bg-base-100 shadow-xl my-5 p-5">
+      <section class="bg-base-100 shadow-xl my-5 p-5 text-center">
         <input
           id="search-field"
           type="text"
@@ -40,7 +45,9 @@
         ></div>
         <!-- show all button  -->
         <div id="show-all-container" class="mt-2 text-center hidden">
-          <button class="btn btn-accent">Show All</button>
+          <button onclick="handleShowAll()" class="btn btn-accent">
+            Show All
+          </button>
         </div>
       </section>
     </main>

@@ -1,25 +1,30 @@
-const loadPhone = async (searchText) => {
+const loadPhone = async (searchText, isShowAll) => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/phones?search=${searchText}`
   );
   const data = await res.json();
   const phones = data.data;
   //console.log(phones);
-  displayPhones(phones);
+  displayPhones(phones, isShowAll);
 };
 
-const displayPhones = (phones) => {
+const displayPhones = (phones, isShowAll) => {
   console.log(phones);
   const phoneContainer = document.getElementById("phone-container");
   phoneContainer.innerText = "";
 
   const showAllContainer = document.getElementById("show-all-container");
 
-  phones.length >= 7
+  phones.length >= 7 && !isShowAll
     ? showAllContainer.classList.remove("hidden")
     : showAllContainer.classList.add("hidden");
 
-  phones = phones.slice(0, 6);
+  console.log("is show all: ", isShowAll);
+
+  //display 6 phones if show all isn't clicked
+  if (!isShowAll) {
+    phones = phones.slice(0, 6);
+  }
 
   phones.forEach((phone) => {
     //console.log(phone);
@@ -34,11 +39,11 @@ const displayPhones = (phones) => {
         alt="phone-image"
       />
     </figure>
-    <div class="card-body">
+    <div class="card-body text-center">
       <h2 class="card-title">${phone.phone_name}</h2>
       <p>If a dog chews shoes whose shoes does he choose?</p>
-      <div class="card-actions justify-end">
-        <button class="btn btn-primary">Buy Now</button>
+      <div class="card-actions justify-center">
+        <button class="btn btn-accent">Show Details</button>
       </div>
     </div>
     `;
@@ -51,11 +56,11 @@ const displayPhones = (phones) => {
 };
 
 //handle the search button
-const handleSearch = () => {
+const handleSearch = (isShowAll) => {
   toggleSpinner(true);
   const searchField = document.getElementById("search-field");
   const searchText = searchField.value;
-  loadPhone(searchText);
+  loadPhone(searchText, isShowAll);
 };
 
 const toggleSpinner = (isLoading) => {
@@ -65,4 +70,9 @@ const toggleSpinner = (isLoading) => {
   } else {
     spinner.classList.add("hidden");
   }
+};
+
+//handle show all
+const handleShowAll = () => {
+  handleSearch(true);
 };
