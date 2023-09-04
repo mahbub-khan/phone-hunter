@@ -45,10 +45,24 @@ const displayPhones = (phones) => {
     //4 Append Child
     phoneContainer.appendChild(phoneCard);
   });
+
+  //hide loading spinner after all data is loaded
+  toggleSpinner(false);
 };
 
+//handle the search button
 const handleSearch = () => {
+  toggleSpinner(true);
   const searchField = document.getElementById("search-field");
   const searchText = searchField.value;
   loadPhone(searchText);
+};
+
+const toggleSpinner = (isLoading) => {
+  const spinner = document.getElementById("spinner");
+  if (isLoading) {
+    spinner.classList.remove("hidden");
+  } else {
+    spinner.classList.add("hidden");
+  }
 };

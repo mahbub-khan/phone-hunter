@@ -26,8 +26,14 @@
           Search
         </button>
       </section>
+
       <!-- search result  -->
       <section>
+        <!-- spinner or loader  -->
+        <div id="spinner" class="text-center my-40 hidden">
+          <span class="loading loading-infinity loading-lg"></span>
+        </div>
+        <!-- all phones we got after searching  -->
         <div
           id="phone-container"
           class="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3"
